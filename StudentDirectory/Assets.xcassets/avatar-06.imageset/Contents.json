@@ -1,0 +1,10 @@
+{
+  "images" : [
+    {
+      "filename" : "avatar-06.svg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : { "author" : "course", "version" : 1 }
+}

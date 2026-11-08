@@ -84,8 +84,8 @@ whose filter is that exact subject string; rows come from
 - [x] Subject-filtered list
 - [x] Unit and UI tests
 - [x] Optional add/edit/delete bonus, if attempted
-- [ ] Local verification and CI review
-- [ ] Final diff and evidence review
+- [x] Local verification and CI review
+- [x] Final diff and evidence review
 
 ## Verification plan
 

@@ -17,6 +17,7 @@ agent at my request, step by step, and reviewed before moving on.
 | 2026-11-07 | Claude Code: `.gitignore`, `.github/workflows/tests.yml`, shared scheme with parallel testing off | Checked no build output, user data, or secrets are tracked | `git status`; `StudentDirectory.xcodeproj/xcshareddata/xcschemes/StudentDirectory.xcscheme` |
 | 2026-11-07 | Local test runs of the README command (3 runs, see below) | Read the failures in the `.xcresult` bundles and reviewed the agent's fixes | Run 1 and 2: `TEST FAILED`; run 3: `TEST SUCCEEDED`, 19/19 |
 | 2026-11-08 | Manual check of the running app in the iPhone 17 Simulator | Went through every flow by hand: list of 10 students, detail screen with all fields and back, subject filter (Ada → Math shows 3 students), add (valid + blank/0 rejected with alert), edit name/age (detail and list refresh), swipe-to-delete. Everything worked as expected | Simulator run of the Debug build |
+| 2026-11-08 | Claude Code: created the public GitHub repo with `gh`, pushed (after granting the `workflow` token scope), watched CI | Confirmed commit author is only me, no co-author line; read the CI log | Actions run 42475311207: success, 19/19 |
 
 ### Local test run history
 
@@ -60,12 +61,18 @@ agent at my request, step by step, and reviewed before moving on.
   → `** TEST SUCCEEDED **`, 19 tests, 0 failures (Xcode 26.6, iOS 26.5
   Simulator, iPhone 17, 2026-11-07). 4 starter tests + 15 student-authored
   tests (8 unit, 7 UI).
-- **CI URL/status:** TODO — add the GitHub Actions run URL and status after
-  pushing. A local pass is not evidence that CI passed.
+- **CI URL/status:** **success** —
+  https://github.com/KristinaRiabova304/apple-hw3/actions/runs/42475311207
+  (workflow `Tests`, commit `df7c258b2c5211bb80d38e23af7f4e7a5538f530`,
+  `macos-26` runner, Xcode 26.6, iPhone 17): `** TEST SUCCEEDED **`, 19 tests
+  (10 unit + 9 UI), 0 failures. Later documentation-only commits trigger the
+  same workflow; see the repository's Actions tab.
 - **Known limitation or remaining risk:**
   - UI tests are slow on a freshly installed simulator and can hit environment
     timeouts; parallel testing is disabled to keep them stable.
-  - The CI workflow targets `macos-26` with the latest stable Xcode; it has not
-    run yet, and `iPhone 17` must exist on the runner image.
+  - The CI workflow targets `macos-26` with the latest stable Xcode and needs
+    an `iPhone 17` simulator on the runner image; a future image change could
+    break the destination. CI shows a non-blocking Node.js 20 deprecation
+    warning for `actions/checkout@v4`.
   - Data is in memory only: added/edited/deleted students reset on relaunch
     (persistence was not required).
